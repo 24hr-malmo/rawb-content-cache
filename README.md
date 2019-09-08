@@ -59,3 +59,9 @@ client.subscribe('foo', '/mycoolresource', (data) => {
 The ```subscribe``` function will not fetch anything for you, but will register the callback so you can fetch what you need.
 It will not provide you with the content either, just the reference to it. 
 
+## History
+
+- 0.8.1 [2019-09-08] : Updated docs
+- 0.8.0 [2019-09-08] : Refactored version with exposed fetch and subcribe after creating a client
+- 0.7.0 [2019-09-07] : First functional working
+
