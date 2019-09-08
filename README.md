@@ -5,9 +5,9 @@ when athe correct content is updated at the source.
 
 ## How to use
 
-1. Create a client like this (call it ```content-cache.js``` or something):
+Create a client like this (call it ```content-cache.js``` or something):
 
-```
+```javascript
 const ContentClient = require('@24hr/rawb-content-cache');
 
 const config = require('../config');
@@ -30,19 +30,11 @@ const client = ContentClient({
 
 });
 
-module.exports = client;
-```
-
-2. Use the client where ever you need. As soon as you ffetch something, it will begin to subscribe to that content:
-
-```
-const contentClient = require('./content-cache');
-
 // The first parameter is the siteId, which is needed as part of the request in the content service since it might provide data for several sites.
 // The second parameter is the resource key.
 // The third parameter is the url to fetch the resource. This is typically just the url of the content service with the key, 
 // but in some cases it might go trough something else. 
-const response = await contentClient.fetch('foo', '/mycoolresource, `http://your.content.service.com/foo`);
+const response = await client.fetch('foo', '/mycoolresource, `http://your.content.service.com/foo`);
 
 console.log(response);
 ```
@@ -55,9 +47,8 @@ When it gets a signal, it will re-fetch the resource with the resource url (thir
 The example above showed the ```fetch``` function.
 The client will also expose a function called ```subcribe``` that is a little more barebone:
 
-```
-const contentClient = require('./content-cache');
-content.subscribe('foo', '/mycoolresource', (data) => {
+```javascript
+client.subscribe('foo', '/mycoolresource', (data) => {
     console.log('documentType', data.documentType);
     console.log('hash', data.hash);
     console.log('resource', data.resource);
