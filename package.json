@@ -1,6 +1,6 @@
 {
   "name": "@24hr/rawb-content-cache",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "description": "A utlity to keep cached data from a rawb-content service and keep the data up to date by redis events",
   "main": "./src/index.js",
   "scripts": {
