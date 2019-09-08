@@ -34,7 +34,7 @@ const client = ContentClient({
 // The second parameter is the resource key.
 // The third parameter is the url to fetch the resource. This is typically just the url of the content service with the key, 
 // but in some cases it might go trough something else. 
-const response = await client.fetch('foo', '/mycoolresource, `http://your.content.service.com/foo`);
+const response = await client.fetch('foo', '/mycoolresource', 'http://your.content.service.com/foo');
 
 console.log(response);
 ```
@@ -61,6 +61,7 @@ It will not provide you with the content either, just the reference to it.
 
 ## History
 
+- 0.8.2 [2019-09-08] : Updated docs again 
 - 0.8.1 [2019-09-08] : Updated docs
 - 0.8.0 [2019-09-08] : Refactored version with exposed fetch and subcribe after creating a client
 - 0.7.0 [2019-09-07] : First functional working
