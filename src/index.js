@@ -9,7 +9,7 @@ const simpleLogger = {
     debug: console.log,
 };
 
-const create = ({ redisUrl, role, apiToken, logger = simpleLogger}) => {
+const create = ({ redisUrl, role, apiToken, logger = simpleLogger, graphQLEndpoint}) => {
 
     const redisClient = redis.createClient(redisUrl);
     const cache = new LRU({ max: 500, maxAge: 1000 * 60 * 60, });
@@ -28,6 +28,7 @@ const create = ({ redisUrl, role, apiToken, logger = simpleLogger}) => {
         cache,
         logger,
         apiToken,
+        graphQLEndpoint,
     });
 
 };

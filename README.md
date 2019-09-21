@@ -3,9 +3,7 @@
 This module keeps cached content from a fetch and subscrobes to events on a RAWB Content Service so it can refetch 
 when athe correct content is updated at the source.
 
-## How to use
-
-Create a client like this (call it ```content-cache.js``` or something):
+## Example
 
 ```javascript
 const ContentClient = require('@24hr/rawb-content-cache');
@@ -61,6 +59,7 @@ It will not provide you with the content either, just the reference to it.
 
 ## History
 
+- 0.8.3 [2019-09-08] : Updated docs again 
 - 0.8.2 [2019-09-08] : Updated docs again 
 - 0.8.1 [2019-09-08] : Updated docs
 - 0.8.0 [2019-09-08] : Refactored version with exposed fetch and subcribe after creating a client

@@ -1,6 +1,6 @@
 {
   "name": "@24hr/rawb-content-cache",
-  "version": "0.8.2",
+  "version": "0.9.0",
   "description": "A utlity to keep cached data from a rawb-content service and keep the data up to date by redis events",
   "main": "./src/index.js",
   "scripts": {
@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/24hr-malmo/rawb-content-cache#readme",
   "dependencies": {
+    "graphql-request": "1.8.2",
     "lru-cache": "5.1.1",
     "node-fetch": "2.6.0",
     "redis": "2.8.0"

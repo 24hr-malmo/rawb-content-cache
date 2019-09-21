@@ -1,8 +1,8 @@
 const nodeFetch = require('node-fetch');
 const { mergeDeep } = require('./utils');
+const { GraphQLClient } = require('graphql-request');
 
-
-const ContentClientFactory = ({ redisClient, role, cache, apiToken, fetch, logger }) => {
+const ContentClientFactory = ({ redisClient, role, cache, apiToken, fetch, logger, graphQLEndpoint, }) => {
 
     let subscribedKeys = [];
 
@@ -40,6 +40,37 @@ const ContentClientFactory = ({ redisClient, role, cache, apiToken, fetch, logge
             subscribedKeys[channel] = callback;
             redisClient.subscribe(channel);
         }
+    };
+
+    const contentCacheGraphql = async (siteId, key, query) => {
+
+        const client = new GraphQLClient(graphQLEndpoint, {
+            headers: {
+                'Authorization': 'Bearer ' + apiToken,
+                'credentials': 'include', 
+                'x-role': role, 
+                'x-site-id': siteId, 
+            }
+        });
+
+        const channel = getChannelKey(role, siteId, key);
+
+        contentSubscriber(siteId, key, async () => {
+            let result = await client.request(query);
+            console.log('RESSSS', result);
+            cache.set(channel, result);
+        });
+
+        let cached = cache.get(channel);
+        if (cached) {
+            return cached;
+        }
+
+        let result = await client.request(query);
+        cache.set(channel, result);
+
+        return result;
+
     };
 
     const contentCache = (fetch) => async (siteId, key, url) => {
@@ -112,6 +143,7 @@ const ContentClientFactory = ({ redisClient, role, cache, apiToken, fetch, logge
 
     return {
         fetch: contentCache(fetch || fetchData),
+        fetchQuery: contentCacheGraphql,
         subscribe: contentSubscriber,
     };
 
