@@ -53,11 +53,10 @@ const ContentClientFactory = ({ redisClient, role, cache, apiToken, fetch, logge
             }
         });
 
-        const channel = getChannelKey(role, siteId, key);
+        const channel = getChannelKey(siteId, key);
 
         contentSubscriber(siteId, key, async () => {
             let result = await client.request(query);
-            console.log('RESSSS', result);
             cache.set(channel, result);
         });
 
